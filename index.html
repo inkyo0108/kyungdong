@@ -952,7 +952,7 @@
 
     <div id="chartSection" style="display:none">
       <div class="dash-actions">
-        <button type="button" class="action-btn" onclick="clearData()">🗑 전체 데이터 초기화</button>
+        <button type="button" class="action-btn primary" onclick="renderDashboard()">🔄 최신 데이터 불러오기</button>
       </div>
 
       <div class="section-title">문항별 평균 만족 점수</div>
@@ -988,13 +988,16 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
+// ═══════════════════════════════════════════
+// Google Apps Script 엔드포인트 (DB 역할)
+// ═══════════════════════════════════════════
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby2N3SZZmoOWzZu2stNM61juNhp-JDTajC8uOmABWZCD8-OiG2Amk4AhFUb8mnlLbYR/exec';
+
 // ─────────────────────────────────────────
-// 1. 평점 버튼 동적 생성 (버그 핵심 수정)
-//    HTML에 inline onclick 넣으면 <button> 내부 클릭 시
-//    이벤트 타겟이 <small> 등 자식 요소가 되어 `this`가 버튼이 아닌 문제 발생.
-//    → JS로 직접 생성 후 addEventListener 사용으로 완전 해결.
+// 1. 평점 버튼 동적 생성
 // ─────────────────────────────────────────
 const RATING_LABELS = { 1:'매우 불만족', 3:'보통', 5:'매우 만족' };
+const ratings = {};
 
 function buildRatingRow(qid) {
   const row = document.getElementById(qid);
@@ -1006,8 +1009,7 @@ function buildRatingRow(qid) {
     btn.className = 'rating-btn';
     btn.dataset.val = v;
     btn.innerHTML = v + (RATING_LABELS[v] ? '<br><small>' + RATING_LABELS[v] + '</small>' : '');
-    btn.addEventListener('click', function() {
-      // 같은 row 내 모든 버튼 선택 해제
+    btn.addEventListener('click', function () {
       row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       ratings[qid] = v;
@@ -1015,19 +1017,10 @@ function buildRatingRow(qid) {
     row.appendChild(btn);
   }
 }
-
-// 페이지 로드 시 평점 버튼 생성
 ['q3','q4','q5','q7'].forEach(buildRatingRow);
 
 // ─────────────────────────────────────────
-// 2. 공통 상태
-// ─────────────────────────────────────────
-const STORAGE_KEY = 'navien_survey_responses';
-const ratings = {};
-let responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-
-// ─────────────────────────────────────────
-// 3. 라디오 옵션 선택
+// 2. 라디오 옵션 선택
 // ─────────────────────────────────────────
 function selectOption(el, qid) {
   document.querySelectorAll('#' + qid + ' .option-item').forEach(i => i.classList.remove('selected'));
@@ -1035,55 +1028,95 @@ function selectOption(el, qid) {
 }
 
 // ─────────────────────────────────────────
-// 4. 설문 제출
+// 3. 설문 제출 → Google Sheets로 전송
 // ─────────────────────────────────────────
-function submitSurvey() {
+async function submitSurvey() {
   const date = document.getElementById('f-date').value;
-  const q3  = ratings['q3'];
-  const q4  = ratings['q4'];
-  const q5  = ratings['q5'];
-  const q7  = ratings['q7'];
-  const q8  = document.querySelector('[name="q8"]:checked')?.value;
-  const q10 = document.querySelector('[name="q10"]:checked')?.value;
-  const q9  = document.getElementById('q9').value.trim();
+  const q3   = ratings['q3'];
+  const q4   = ratings['q4'];
+  const q5   = ratings['q5'];
+  const q7   = ratings['q7'];
+  const q8   = document.querySelector('[name="q8"]:checked')?.value;
+  const q10  = document.querySelector('[name="q10"]:checked')?.value;
+  const q9   = document.getElementById('q9').value.trim();
 
   if (!date || !q3 || !q4 || !q5 || !q7 || !q8 || !q10) {
     alert('필수 항목을 모두 입력/선택해 주세요.');
     return;
   }
 
-  const entry = { date, q3, q4, q5, q7, q8, q10, q9,
-    submittedAt: new Date().toISOString() };
-  responses.push(entry);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+  // 제출 버튼 로딩 상태
+  const submitBtn = document.querySelector('.submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '제출 중...';
 
-  document.getElementById('surveyForm').style.display = 'none';
-  document.getElementById('successScreen').classList.add('show');
+  const entry = { submittedAt: new Date().toISOString(), date, q3, q4, q5, q7, q8, q10, q9 };
+
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Apps Script CORS 우회 (no-cors는 응답 본문 없음 — 정상)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+    // no-cors 에서는 응답을 읽을 수 없지만 요청은 정상 전송됨
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('successScreen').classList.add('show');
+  } catch (err) {
+    alert('제출 중 오류가 발생했습니다. 네트워크를 확인해 주세요.\n' + err.message);
+    submitBtn.disabled = false;
+    submitBtn.textContent = '설문 제출하기 →';
+  }
 }
 
 // ─────────────────────────────────────────
-// 5. 데이터 초기화
+// 4. Google Sheets에서 데이터 불러오기
+// ─────────────────────────────────────────
+async function fetchResponses() {
+  // 로딩 표시
+  document.getElementById('stat-total').textContent = '...';
+  try {
+    const res = await fetch(GAS_URL + '?t=' + Date.now()); // 캐시 방지
+    const data = await res.json();
+    // q3~q7은 숫자로 변환 (Sheets에서 문자열로 올 수 있음)
+    return data.map(r => ({
+      ...r,
+      q3: Number(r.q3),
+      q4: Number(r.q4),
+      q5: Number(r.q5),
+      q7: Number(r.q7),
+    }));
+  } catch (err) {
+    console.error('데이터 로드 실패:', err);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────
+// 5. 차트 인스턴스 관리
 // ─────────────────────────────────────────
 const chartInstances = {};
 
-function clearData() {
-  if (!confirm('모든 응답 데이터를 삭제하시겠습니까?')) return;
-  responses = [];
-  localStorage.removeItem(STORAGE_KEY);
-  // 기존 차트 인스턴스 전부 파괴
+function destroyAllCharts() {
   Object.keys(chartInstances).forEach(key => {
     chartInstances[key].destroy();
     delete chartInstances[key];
   });
-  renderDashboard();
 }
 
 // ─────────────────────────────────────────
-// 6. 대시보드 렌더링
+// 6. 대시보드 렌더링 (Sheets 데이터 기반)
 // ─────────────────────────────────────────
+async function renderDashboard() {
+  destroyAllCharts();
 
-function renderDashboard() {
-  const data = responses;
+  // 로딩 스피너 표시
+  document.getElementById('emptyDash').style.display = 'none';
+  document.getElementById('chartSection').style.display = 'none';
+  document.getElementById('stat-total').textContent = '로딩 중...';
+
+  const data = await fetchResponses();
+
   document.getElementById('stat-total').textContent = data.length;
 
   if (data.length === 0) {
@@ -1132,25 +1165,22 @@ function renderDashboard() {
   // 도넛 차트
   const grid = document.getElementById('chartsGrid');
   grid.innerHTML = '';
-
   const pieConfigs = [
-    { id:'chart-q3',  title:'Q1 기사 친절도',       key:'q3',  labels:['1점','2점','3점','4점','5점'], isRating:true },
-    { id:'chart-q4',  title:'Q2 점검 충분도',        key:'q4',  labels:['1점','2점','3점','4점','5점'], isRating:true },
-    { id:'chart-q5',  title:'Q3 설명 충분도',        key:'q5',  labels:['1점','2점','3점','4점','5점'], isRating:true },
-    { id:'chart-q7',  title:'Q4 종합 만족도',        key:'q7',  labels:['1점','2점','3점','4점','5점'], isRating:true },
-    { id:'chart-q8',  title:'Q5 재추천 의향',        key:'q8',  labels:['적극 추천','추천','보통','비추천'] },
-    { id:'chart-q10', title:'Q6 서비스 구독 의향',   key:'q10', labels:['매우 있다','있다','보통','없다'] },
+    { id:'chart-q3',  title:'Q1 기사 친절도',     key:'q3',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q4',  title:'Q2 점검 충분도',      key:'q4',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q5',  title:'Q3 설명 충분도',      key:'q5',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q7',  title:'Q4 종합 만족도',      key:'q7',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q8',  title:'Q5 재추천 의향',      key:'q8',  labels:['적극 추천','추천','보통','비추천'] },
+    { id:'chart-q10', title:'Q6 서비스 구독 의향', key:'q10', labels:['매우 있다','있다','보통','없다'] },
   ];
   const COLORS = ['#E87722','#1B3D72','#FFB830','#0F1D35','#5B8FD4','#4ECDC4'];
 
   pieConfigs.forEach(cfg => {
-    if (chartInstances[cfg.id]) { chartInstances[cfg.id].destroy(); delete chartInstances[cfg.id]; }
-
     const counts = cfg.isRating
       ? [1,2,3,4,5].map(v => data.filter(r => r[cfg.key] === v).length)
       : cfg.labels.map(l => data.filter(r => r[cfg.key] === l).length);
-
     const total = counts.reduce((a,b) => a + b, 0);
+
     const card = document.createElement('div');
     card.className = 'chart-card';
     card.innerHTML = `
@@ -1166,29 +1196,13 @@ function renderDashboard() {
       type: 'doughnut',
       data: {
         labels: cfg.labels,
-        datasets: [{
-          data: counts,
-          backgroundColor: COLORS.slice(0, cfg.labels.length),
-          borderWidth: 2,
-          borderColor: '#fff',
-          hoverOffset: 6
-        }]
+        datasets: [{ data: counts, backgroundColor: COLORS.slice(0, cfg.labels.length), borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '60%',
+        responsive: true, maintainAspectRatio: false, cutout: '60%',
         plugins: {
           legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => {
-                const val = ctx.raw;
-                const pct = total > 0 ? Math.round(val / total * 100) : 0;
-                return ` ${ctx.label}: ${val}건 (${pct}%)`;
-              }
-            }
-          }
+          tooltip: { callbacks: { label: c => ` ${c.label}: ${c.raw}건 (${total > 0 ? Math.round(c.raw/total*100) : 0}%)` } }
         }
       }
     });
@@ -1196,14 +1210,11 @@ function renderDashboard() {
     const leg = document.getElementById('leg-' + cfg.id);
     cfg.labels.forEach((lbl, i) => {
       const pct = total > 0 ? Math.round(counts[i] / total * 100) : 0;
-      leg.innerHTML += `<div class="legend-item">
-        <div class="legend-dot" style="background:${COLORS[i]}"></div>
-        <span>${lbl} (${pct}%)</span>
-      </div>`;
+      leg.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${COLORS[i]}"></div><span>${lbl} (${pct}%)</span></div>`;
     });
   });
 
-  // 자유의견 목록 (버그 수정: ${{}} → ${})
+  // 자유의견 목록
   const commentList = document.getElementById('commentList');
   const comments = [...data].filter(r => r.q9 && r.q9.trim().length > 0).reverse();
   if (comments.length === 0) {
@@ -1232,13 +1243,10 @@ function renderDashboard() {
       <td>${r.q8 || '-'}</td>
       <td>${r.q10 || '-'}</td>
       <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#6B7280;"
-          title="${r.q9 || ''}">${r.q9 ? r.q9.substring(0, 28) + (r.q9.length > 28 ? '…' : '') : '-'}</td>
+          title="${r.q9 || ''}">${r.q9 ? r.q9.substring(0,28) + (r.q9.length > 28 ? '…' : '') : '-'}</td>
     </tr>
   `).join('');
 }
-
-// 초기 렌더
-renderDashboard();
 
 // ─────────────────────────────────────────
 // 7. 관리자 인증
@@ -1276,6 +1284,7 @@ function doAdminLogin() {
 }
 function adminLogout() {
   isAdmin = false;
+  destroyAllCharts();
   document.getElementById('adminChip').classList.remove('show');
   document.getElementById('navAdminBtn').style.display = '';
   document.getElementById('headerTitle').textContent = '경동나비엔 사전점검 만족도 조사';
@@ -1283,10 +1292,9 @@ function adminLogout() {
   document.getElementById('page-survey').classList.add('active');
 }
 function goToDashboard() {
-  responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-dashboard').classList.add('active');
-  renderDashboard();
+  renderDashboard(); // Sheets에서 최신 데이터 fetch
 }
 </script>
 </body>
