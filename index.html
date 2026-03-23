@@ -783,6 +783,1327 @@
       </div>
     </div>
 
+    <!-- 이용 용도 -->
+    <div class="question-card" style="animation-delay:0.08s">
+      <div class="q-header">
+        <div class="q-num">📌</div>
+        <div>
+          <div class="q-text">현재 이용 용도<span class="required-mark">*</span></div>
+          <div class="q-sub">해당 시설의 이용 용도를 선택해 주세요.</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;" id="f-facility">
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="공공시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏛 공공시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="교육시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏫 교육시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="상업시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏬 상업시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="숙박시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏨 숙박시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="주거시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏠 주거시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="의료시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏥 의료시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="종교시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">⛪ 종교시설</span>
+        </label>
+        <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
+          <input type="radio" name="f-facility" value="체육시설">
+          <div class="radio-circle"></div>
+          <span class="option-label">🏟 체육시설</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q1 친절도 -->
+    <div class="question-card" style="animation-delay:0.1s">
+      <div class="q-header">
+        <div class="q-num">1</div>
+        <div>
+          <div class="q-text">점검 기사의 친절도<span class="required-mark">*</span></div>
+          <div class="q-sub">1 (매우 불만족) ~ 5 (매우 만족)</div>
+        </div>
+      </div>
+      <div class="rating-row" id="q3"></div>
+    </div>
+
+    <!-- Q2 점검 충분성 -->
+    <div class="question-card" style="animation-delay:0.15s">
+      <div class="q-header">
+        <div class="q-num">2</div>
+        <div>
+          <div class="q-text">점검 항목의 충분성<span class="required-mark">*</span></div>
+          <div class="q-sub">점검 항목이 충분히 꼼꼼하게 이루어졌나요?</div>
+        </div>
+      </div>
+      <div class="rating-row" id="q4"></div>
+    </div>
+
+    <!-- Q3 설명 충분도 -->
+    <div class="question-card" style="animation-delay:0.2s">
+      <div class="q-header">
+        <div class="q-num">3</div>
+        <div>
+          <div class="q-text">점검 결과 설명 및 안내 충분도<span class="required-mark">*</span></div>
+          <div class="q-sub">점검 후 결과 및 이상 사항에 대한 설명이 충분했나요?</div>
+        </div>
+      </div>
+      <div class="rating-row" id="q5"></div>
+    </div>
+
+    <!-- Q4 종합 만족도 -->
+    <div class="question-card" style="animation-delay:0.25s">
+      <div class="q-header">
+        <div class="q-num">4</div>
+        <div>
+          <div class="q-text">종합 만족도<span class="required-mark">*</span></div>
+          <div class="q-sub">이번 사전점검 서비스에 대한 전반적인 만족도를 평가해 주세요.</div>
+        </div>
+      </div>
+      <div class="rating-row" id="q7"></div>
+    </div>
+
+    <!-- Q5 재추천 의향 -->
+    <div class="question-card" style="animation-delay:0.3s">
+      <div class="q-header">
+        <div class="q-num">5</div>
+        <div>
+          <div class="q-text">재추천 의향<span class="required-mark">*</span></div>
+          <div class="q-sub">경동나비엔 사전점검 서비스를 주변에 추천하시겠습니까?</div>
+        </div>
+      </div>
+      <div class="options-grid" id="q8">
+        <label class="option-item" onclick="selectOption(this,'q8')">
+          <input type="radio" name="q8" value="적극 추천">
+          <div class="radio-circle"></div>
+          <span class="option-label">👍 적극 추천하겠다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q8')">
+          <input type="radio" name="q8" value="추천">
+          <div class="radio-circle"></div>
+          <span class="option-label">🙂 추천하겠다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q8')">
+          <input type="radio" name="q8" value="보통">
+          <div class="radio-circle"></div>
+          <span class="option-label">😐 잘 모르겠다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q8')">
+          <input type="radio" name="q8" value="비추천">
+          <div class="radio-circle"></div>
+          <span class="option-label">👎 추천하지 않겠다</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q6 서비스 구독(유지보수) 의향 -->
+    <div class="question-card" style="animation-delay:0.35s">
+      <div class="q-header">
+        <div class="q-num">6</div>
+        <div>
+          <div class="q-text">경동나비엔 서비스 구독(유지보수) 의향<span class="required-mark">*</span></div>
+          <div class="q-sub">정기 점검·부품 교체 등 유지보수 서비스 구독 상품에 가입하실 의향이 있으십니까?</div>
+
+        </div>
+      </div>
+      <div class="options-grid" id="q10">
+        <label class="option-item" onclick="selectOption(this,'q10')">
+          <input type="radio" name="q10" value="매우 있다">
+          <div class="radio-circle"></div>
+          <span class="option-label">🌟 매우 있다 — 지금 바로 가입하고 싶다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q10')">
+          <input type="radio" name="q10" value="있다">
+          <div class="radio-circle"></div>
+          <span class="option-label">👍 있다 — 조건 확인 후 가입을 고려하겠다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q10')">
+          <input type="radio" name="q10" value="보통">
+          <div class="radio-circle"></div>
+          <span class="option-label">😐 잘 모르겠다 — 더 알아봐야 할 것 같다</span>
+        </label>
+        <label class="option-item" onclick="selectOption(this,'q10')">
+          <input type="radio" name="q10" value="없다">
+          <div class="radio-circle"></div>
+          <span class="option-label">🙅 없다 — 현재는 구독 의향이 없다</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Q7 자유의견 -->
+    <div class="question-card" style="animation-delay:0.4s">
+      <div class="q-header">
+        <div class="q-num">7</div>
+        <div>
+          <div class="q-text">개선 사항 및 자유 의견</div>
+          <div class="q-sub">서비스 개선을 위한 의견이나 칭찬 사항을 자유롭게 적어 주세요.</div>
+        </div>
+      </div>
+      <textarea class="survey-textarea" id="q9" placeholder="예) 점검 기사님이 매우 친절하셨습니다. 서비스 구독 상품에 대해 더 자세히 안내해 주시면 좋겠습니다..."></textarea>
+    </div>
+
+    <div class="submit-area">
+      <button type="button" class="submit-btn" onclick="submitSurvey()">설문 제출하기 →</button>
+      <div class="submit-note">* 표시된 항목은 필수 입력 사항입니다.</div>
+    </div>
+
+  </div><!-- /surveyForm -->
+
+  <!-- Success -->
+  <div class="survey-container">
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✅</div>
+      <h2>응답이 제출되었습니다!</h2>
+      <p>소중한 의견 감사드립니다.<br>고객님의 피드백은 경동나비엔 서비스 품질 향상에 소중히 반영됩니다.</p>
+    </div>
+  </div>
+
+</div><!-- /page-survey -->
+
+<!-- ══════════════ DASHBOARD PAGE ══════════════ -->
+<div id="page-dashboard" class="page">
+
+  <div class="dashboard-header">
+    <h2>📊 사전점검 만족도 분석 대시보드</h2>
+    <p>중대형 / 캐스케이드 보일러 사전점검 서비스 응답 분석</p>
+    <div class="dash-meta">
+      <div class="dash-stat"><div class="dash-stat-val" id="stat-total">0</div><div class="dash-stat-label">총 응답 수</div></div>
+      <div class="dash-stat"><div class="dash-stat-val" id="stat-avg">-</div><div class="dash-stat-label">종합 평균 점수</div></div>
+      <div class="dash-stat"><div class="dash-stat-val" id="stat-recommend">-</div><div class="dash-stat-label">추천 의향률</div></div>
+      <div class="dash-stat"><div class="dash-stat-val" id="stat-subscribe">-</div><div class="dash-stat-label">서비스 구독 의향률</div></div>
+      <div class="dash-stat"><div class="dash-stat-val" id="stat-comment">-</div><div class="dash-stat-label">자유의견 작성률</div></div>
+    </div>
+  </div>
+
+  <div class="dashboard-body" id="dashboardBody">
+
+    <div class="empty-dash" id="emptyDash">
+      <div class="empty-icon">📭</div>
+      <h3>아직 응답이 없습니다</h3>
+      <p>설문 탭에서 응답을 제출하시면 이 곳에서 실시간으로<br>분석 결과를 확인하실 수 있습니다.</p>
+    </div>
+
+    <div id="chartSection" style="display:none">
+      <div class="dash-actions">
+        <button type="button" class="action-btn primary" onclick="renderDashboard()">🔄 최신 데이터 불러오기</button>
+      </div>
+
+      <div class="section-title">문항별 평균 만족 점수</div>
+      <div class="chart-card" style="margin-bottom:20px">
+        <div class="avg-bar-list" id="avgBarList"></div>
+      </div>
+
+      <div class="section-title">항목별 응답 분포</div>
+      <div class="charts-grid" id="chartsGrid"></div>
+
+      <div class="section-title">자유의견 목록</div>
+      <div class="chart-card wide" style="margin-bottom:20px;">
+        <div id="commentList" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+
+      <div class="section-title">개별 응답 목록</div>
+      <div class="chart-card wide" style="overflow-x:auto">
+        <table class="response-table" id="responseTable">
+          <thead>
+            <tr>
+              <th>#</th><th>점검일자</th><th>이용용도</th><th>친절도</th><th>점검충분도</th>
+              <th>설명충분도</th><th>종합만족도</th><th>추천의향</th><th>구독의향</th>
+              <th>자유의견</th>
+            </tr>
+          </thead>
+          <tbody id="responseBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /page-dashboard -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// ═══════════════════════════════════════════
+// Google Apps Script 엔드포인트 (DB 역할)
+// ═══════════════════════════════════════════
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby2N3SZZmoOWzZu2stNM61juNhp-JDTajC8uOmABWZCD8-OiG2Amk4AhFUb8mnlLbYR/exec';
+
+// ─────────────────────────────────────────
+// 1. 평점 버튼 동적 생성
+// ─────────────────────────────────────────
+const RATING_LABELS = { 1:'매우 불만족', 3:'보통', 5:'매우 만족' };
+const ratings = {};
+
+function buildRatingRow(qid) {
+  const row = document.getElementById(qid);
+  if (!row) return;
+  row.innerHTML = '';
+  for (let v = 1; v <= 5; v++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rating-btn';
+    btn.dataset.val = v;
+    btn.innerHTML = v + (RATING_LABELS[v] ? '<br><small>' + RATING_LABELS[v] + '</small>' : '');
+    btn.addEventListener('click', function () {
+      row.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      ratings[qid] = v;
+    });
+    row.appendChild(btn);
+  }
+}
+['q3','q4','q5','q7'].forEach(buildRatingRow);
+
+// ─────────────────────────────────────────
+// 2. 라디오 옵션 선택
+// ─────────────────────────────────────────
+function selectOption(el, qid) {
+  document.querySelectorAll('#' + qid + ' .option-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ─────────────────────────────────────────
+// 3. 설문 제출 → Google Sheets로 전송
+// ─────────────────────────────────────────
+async function submitSurvey() {
+  const date     = document.getElementById('f-date').value;
+  const facility = document.querySelector('[name="f-facility"]:checked')?.value;
+  const q3   = ratings['q3'];
+  const q4   = ratings['q4'];
+  const q5   = ratings['q5'];
+  const q7   = ratings['q7'];
+  const q8   = document.querySelector('[name="q8"]:checked')?.value;
+  const q10  = document.querySelector('[name="q10"]:checked')?.value;
+  const q9   = document.getElementById('q9').value.trim();
+
+  if (!date || !facility || !q3 || !q4 || !q5 || !q7 || !q8 || !q10) {
+    alert('필수 항목을 모두 입력/선택해 주세요.');
+    return;
+  }
+
+  // 제출 버튼 로딩 상태
+  const submitBtn = document.querySelector('.submit-btn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '제출 중...';
+
+  const entry = { submittedAt: new Date().toISOString(), date, facility, q3, q4, q5, q7, q8, q10, q9 };
+
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Apps Script CORS 우회 (no-cors는 응답 본문 없음 — 정상)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+    // no-cors 에서는 응답을 읽을 수 없지만 요청은 정상 전송됨
+    document.getElementById('surveyForm').style.display = 'none';
+    document.getElementById('successScreen').classList.add('show');
+  } catch (err) {
+    alert('제출 중 오류가 발생했습니다. 네트워크를 확인해 주세요.\n' + err.message);
+    submitBtn.disabled = false;
+    submitBtn.textContent = '설문 제출하기 →';
+  }
+}
+
+// ─────────────────────────────────────────
+// 4. Google Sheets에서 데이터 불러오기
+// ─────────────────────────────────────────
+async function fetchResponses() {
+  // 로딩 표시
+  document.getElementById('stat-total').textContent = '...';
+  try {
+    const res = await fetch(GAS_URL + '?t=' + Date.now()); // 캐시 방지
+    const data = await res.json();
+    // q3~q7은 숫자로 변환 (Sheets에서 문자열로 올 수 있음)
+    return data.map(r => ({
+      ...r,
+      q3: Number(r.q3),
+      q4: Number(r.q4),
+      q5: Number(r.q5),
+      q7: Number(r.q7),
+    }));
+  } catch (err) {
+    console.error('데이터 로드 실패:', err);
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────
+// 5. 차트 인스턴스 관리
+// ─────────────────────────────────────────
+const chartInstances = {};
+
+function destroyAllCharts() {
+  Object.keys(chartInstances).forEach(key => {
+    chartInstances[key].destroy();
+    delete chartInstances[key];
+  });
+}
+
+// ─────────────────────────────────────────
+// 6. 대시보드 렌더링 (Sheets 데이터 기반)
+// ─────────────────────────────────────────
+async function renderDashboard() {
+  destroyAllCharts();
+
+  // 로딩 스피너 표시
+  document.getElementById('emptyDash').style.display = 'none';
+  document.getElementById('chartSection').style.display = 'none';
+  document.getElementById('stat-total').textContent = '로딩 중...';
+
+  const data = await fetchResponses();
+
+  document.getElementById('stat-total').textContent = data.length;
+
+  if (data.length === 0) {
+    document.getElementById('emptyDash').style.display = 'block';
+    document.getElementById('chartSection').style.display = 'none';
+    ['stat-avg','stat-recommend','stat-subscribe','stat-comment'].forEach(id => {
+      document.getElementById(id).textContent = '-';
+    });
+    return;
+  }
+
+  document.getElementById('emptyDash').style.display = 'none';
+  document.getElementById('chartSection').style.display = 'block';
+
+  // 통계 수치
+  const avg7 = (data.reduce((s,r) => s + (r.q7 || 0), 0) / data.length).toFixed(1);
+  document.getElementById('stat-avg').textContent = avg7 + '점';
+  const recCnt = data.filter(r => r.q8 === '적극 추천' || r.q8 === '추천').length;
+  document.getElementById('stat-recommend').textContent = Math.round(recCnt / data.length * 100) + '%';
+  const subCnt = data.filter(r => r.q10 === '매우 있다' || r.q10 === '있다').length;
+  document.getElementById('stat-subscribe').textContent = Math.round(subCnt / data.length * 100) + '%';
+  const commentCnt = data.filter(r => r.q9 && r.q9.trim().length > 0).length;
+  document.getElementById('stat-comment').textContent = Math.round(commentCnt / data.length * 100) + '%';
+
+  // 평균 점수 바
+  const avgItems = [
+    { label: 'Q1 점검 기사 친절도', key: 'q3' },
+    { label: 'Q2 점검 항목 충분성', key: 'q4' },
+    { label: 'Q3 결과 설명 충분도', key: 'q5' },
+    { label: 'Q4 종합 만족도',      key: 'q7' },
+  ];
+  document.getElementById('avgBarList').innerHTML = avgItems.map(item => {
+    const avg = (data.reduce((s,r) => s + (r[item.key] || 0), 0) / data.length).toFixed(1);
+    const pct = (avg / 5 * 100).toFixed(0);
+    return `<div class="avg-bar-item">
+      <div class="avg-bar-header">
+        <span class="avg-bar-label">${item.label}</span>
+        <span class="avg-bar-val">${avg} / 5.0</span>
+      </div>
+      <div class="avg-bar-track">
+        <div class="avg-bar-fill" style="width:${pct}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // 도넛 차트
+  const grid = document.getElementById('chartsGrid');
+  grid.innerHTML = '';
+  const pieConfigs = [
+    { id:'chart-facility', title:'이용 용도', key:'facility', labels:['공공시설','교육시설','상업시설','숙박시설','주거시설','의료시설','종교시설','체육시설'] },
+    { id:'chart-q3',  title:'Q1 기사 친절도',     key:'q3',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q4',  title:'Q2 점검 충분도',      key:'q4',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q5',  title:'Q3 설명 충분도',      key:'q5',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q7',  title:'Q4 종합 만족도',      key:'q7',  labels:['1점','2점','3점','4점','5점'], isRating:true },
+    { id:'chart-q8',  title:'Q5 재추천 의향',      key:'q8',  labels:['적극 추천','추천','보통','비추천'] },
+    { id:'chart-q10', title:'Q6 서비스 구독 의향', key:'q10', labels:['매우 있다','있다','보통','없다'] },
+  ];
+  const COLORS = ['#E87722','#1B3D72','#FFB830','#0F1D35','#5B8FD4','#4ECDC4','#A78BFA','#34D399'];
+
+  pieConfigs.forEach(cfg => {
+    const counts = cfg.isRating
+      ? [1,2,3,4,5].map(v => data.filter(r => r[cfg.key] === v).length)
+      : cfg.labels.map(l => data.filter(r => r[cfg.key] === l).length);
+    const total = counts.reduce((a,b) => a + b, 0);
+
+    const card = document.createElement('div');
+    card.className = 'chart-card';
+    card.innerHTML = `
+      <div class="chart-card-title">${cfg.title}</div>
+      <div class="chart-card-sub">전체 ${total}건 응답</div>
+      <div class="chart-wrap"><canvas id="${cfg.id}"></canvas></div>
+      <div class="legend" id="leg-${cfg.id}"></div>
+    `;
+    grid.appendChild(card);
+
+    const ctx = document.getElementById(cfg.id).getContext('2d');
+    chartInstances[cfg.id] = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: cfg.labels,
+        datasets: [{ data: counts, backgroundColor: COLORS.slice(0, cfg.labels.length), borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '60%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: c => ` ${c.label}: ${c.raw}건 (${total > 0 ? Math.round(c.raw/total*100) : 0}%)` } }
+        }
+      }
+    });
+
+    const leg = document.getElementById('leg-' + cfg.id);
+    cfg.labels.forEach((lbl, i) => {
+      const pct = total > 0 ? Math.round(counts[i] / total * 100) : 0;
+      leg.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${COLORS[i]}"></div><span>${lbl} (${pct}%)</span></div>`;
+    });
+  });
+
+  // 자유의견 목록
+  const commentList = document.getElementById('commentList');
+  const comments = [...data].filter(r => r.q9 && r.q9.trim().length > 0).reverse();
+  if (comments.length === 0) {
+    commentList.innerHTML = '<div style="color:#9CA3AF;font-size:13px;padding:8px 0;">작성된 자유의견이 없습니다.</div>';
+  } else {
+    commentList.innerHTML = comments.map((r, i) => `
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:10px;background:#F8F9FC;border:1px solid #E5E7EB;">
+        <div style="min-width:32px;height:32px;background:var(--navien-red);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">${i + 1}</div>
+        <div>
+          <div style="font-size:12px;color:#5A6A85;margin-bottom:4px;">📅 ${r.date || '-'} &nbsp;|&nbsp; 종합 ${r.q7}점 &nbsp;|&nbsp; 추천: ${r.q8 || '-'}</div>
+          <div style="font-size:14px;color:#0F1D35;line-height:1.6;">${r.q9}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // 개별 응답 테이블
+  document.getElementById('responseBody').innerHTML = [...data].reverse().slice(0, 50).map((r, i) => `
+    <tr>
+      <td>${data.length - i}</td>
+      <td>${r.date || '-'}</td>
+      <td>${r.facility || '-'}</td>
+      <td><span class="score-badge score-${r.q3}">${r.q3}</span></td>
+      <td><span class="score-badge score-${r.q4}">${r.q4}</span></td>
+      <td><span class="score-badge score-${r.q5}">${r.q5}</span></td>
+      <td><span class="score-badge score-${r.q7}">${r.q7}</span></td>
+      <td>${r.q8 || '-'}</td>
+      <td>${r.q10 || '-'}</td>
+      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:#6B7280;"
+          title="${r.q9 || ''}">${r.q9 ? r.q9.substring(0,28) + (r.q9.length > 28 ? '…' : '') : '-'}</td>
+    </tr>
+  `).join('');
+}
+
+// ─────────────────────────────────────────
+// 7. 관리자 인증
+// ─────────────────────────────────────────
+const ADMIN_ID = 'navien2026';
+const ADMIN_PW = 'kdnavien!';
+let isAdmin = false;
+
+function openAdminModal() {
+  if (isAdmin) { goToDashboard(); return; }
+  document.getElementById('adminModal').classList.add('show');
+  setTimeout(() => document.getElementById('adminId').focus(), 120);
+}
+function closeAdminModal() {
+  document.getElementById('adminModal').classList.remove('show');
+  document.getElementById('adminLoginError').textContent = '';
+  document.getElementById('adminId').value = '';
+  document.getElementById('adminPw').value = '';
+}
+function doAdminLogin() {
+  const id = document.getElementById('adminId').value.trim();
+  const pw = document.getElementById('adminPw').value;
+  if (id === ADMIN_ID && pw === ADMIN_PW) {
+    isAdmin = true;
+    closeAdminModal();
+    document.getElementById('adminChip').classList.add('show');
+    document.getElementById('navAdminBtn').style.display = 'none';
+    document.getElementById('headerTitle').textContent = '경동나비엔 사전점검 만족도 — 결과 분석';
+    goToDashboard();
+  } else {
+    document.getElementById('adminLoginError').textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
+    document.getElementById('adminPw').value = '';
+    document.getElementById('adminPw').focus();
+  }
+}
+function adminLogout() {
+  isAdmin = false;
+  destroyAllCharts();
+  document.getElementById('adminChip').classList.remove('show');
+  document.getElementById('navAdminBtn').style.display = '';
+  document.getElementById('headerTitle').textContent = '경동나비엔 사전점검 만족도 조사';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-survey').classList.add('active');
+}
+function goToDashboard() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-dashboard').classList.add('active');
+  renderDashboard(); // Sheets에서 최신 데이터 fetch
+}
+</script>
+</body>
+</html>
+  /* ── HEADER ── */
+  .site-header {
+    background: #1B3D72;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--navien-red);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 4px;
+  }
+  .logo-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: rgba(255,255,255,0.6);
+    border: none;
+    background: transparent;
+  }
+  .nav-tab.active {
+    background: var(--navien-red);
+    color: #fff;
+  }
+  .nav-tab:hover:not(.active) {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── SURVEY PAGE ── */
+  .survey-hero {
+    background: linear-gradient(135deg, #0F1D35 0%, #1B3D72 55%, #1e4a9e 100%);
+    padding: 60px 32px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .survey-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(242,109,33,0.08);
+    pointer-events: none;
+  }
+  .survey-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(242,109,33,0.2);
+    border: 1px solid rgba(242,109,33,0.5);
+    color: #ffaa66;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .survey-hero h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .survey-hero h1 span { color: #F7A05A; }
+  .survey-hero p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 28px;
+  }
+  .progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .progress-pill {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 6px 18px;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ── FORM ── */
+  .survey-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  .question-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--navien-border);
+    transition: box-shadow 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+  .question-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .q-num {
+    min-width: 32px; height: 32px;
+    background: var(--navien-red);
+    color: #fff;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .q-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    font-weight: 400;
+  }
+  .required-mark { color: var(--navien-red); margin-left: 3px; }
+
+  /* Radio */
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--navien-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .option-item:hover {
+    border-color: var(--navien-red);
+    background: rgba(242,109,33,0.03);
+  }
+  .option-item input[type="radio"] { display: none; }
+  .option-item.selected {
+    border-color: var(--navien-red);
+    background: rgba(242,109,33,0.05);
+  }
+  .radio-circle {
+    width: 20px; height: 20px;
+    border: 2px solid var(--navien-border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .option-item.selected .radio-circle {
+    border-color: var(--navien-red);
+    background: var(--navien-red);
+  }
+  .option-item.selected .radio-circle::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .option-label { font-size: 14px; color: var(--text-primary); font-weight: 400; }
+
+  /* ── Rating Buttons (버그 수정: type="button" 명시, pointer-events 안전하게) ── */
+  .rating-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .rating-btn {
+    flex: 1;
+    min-width: 52px;
+    padding: 12px 8px;
+    border: 1.5px solid var(--navien-border);
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.4;
+    user-select: none;
+  }
+  .rating-btn:hover {
+    border-color: var(--navien-red);
+    color: var(--navien-red);
+    background: rgba(232,119,34,0.04);
+  }
+  .rating-btn.selected {
+    border-color: var(--navien-red);
+    background: var(--navien-red);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(232,119,34,0.35);
+  }
+  .rating-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    padding: 0 4px;
+  }
+
+  /* Textarea */
+  .survey-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--navien-border);
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s;
+    outline: none;
+    background: #fafafa;
+  }
+  .survey-textarea:focus { border-color: var(--navien-red); background: #fff; }
+
+  /* Info inputs */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .info-field { display: flex; flex-direction: column; gap: 6px; }
+  .info-field label { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.5px; }
+  .info-input {
+    padding: 11px 14px;
+    border: 1.5px solid var(--navien-border);
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fafafa;
+  }
+  .info-input:focus { border-color: var(--navien-red); background: #fff; }
+
+  /* Submit */
+  .submit-area { text-align: center; margin-top: 32px; }
+  .submit-btn {
+    background: var(--navien-red);
+    color: #fff;
+    border: none;
+    padding: 16px 60px;
+    border-radius: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(242,109,33,0.3);
+  }
+  .submit-btn:hover { background: #d55a15; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(242,109,33,0.4); }
+  .submit-note { font-size: 12px; color: var(--text-secondary); margin-top: 12px; }
+
+  /* Success */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 32px;
+  }
+  .success-screen.show { display: block; }
+  .success-icon {
+    width: 80px; height: 80px;
+    background: rgba(16,185,129,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 36px;
+    animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .success-screen h2 { font-size: 24px; font-weight: 900; margin-bottom: 12px; }
+  .success-screen p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* ── DASHBOARD PAGE ── */
+  .dashboard-header {
+    background: linear-gradient(120deg, #0F1D35 0%, #1B3D72 100%);
+    padding: 32px;
+    color: #fff;
+  }
+  .dashboard-header h2 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+  .dashboard-header p { font-size: 14px; opacity: 0.6; }
+  .dash-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .dash-stat {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 12px 20px;
+    min-width: 140px;
+  }
+  .dash-stat-val { font-size: 28px; font-weight: 900; color: #fff; }
+  .dash-stat-label { font-size: 12px; opacity: 0.6; margin-top: 2px; }
+
+  .dashboard-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navien-red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--navien-red);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .chart-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--navien-border);
+  }
+  .chart-card.wide {
+    grid-column: 1 / -1;
+  }
+  .chart-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .chart-card-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+  .chart-wrap {
+    position: relative;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas { max-width: 100%; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Avg score bar */
+  .avg-bar-list { display: flex; flex-direction: column; gap: 14px; }
+  .avg-bar-item {}
+  .avg-bar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .avg-bar-label { font-weight: 500; color: var(--text-primary); }
+  .avg-bar-val { font-weight: 700; color: var(--navien-red); }
+  .avg-bar-track {
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .avg-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #E87722, #F7A05A);
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.25,0.8,0.25,1);
+  }
+
+  /* Responses table */
+  .response-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .response-table th {
+    background: #1B3D72;
+    color: #fff;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .response-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--navien-border);
+    color: var(--text-primary);
+  }
+  .response-table tr:hover td { background: rgba(242,109,33,0.03); }
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .score-5 { background: rgba(16,185,129,0.15); color: #059669; }
+  .score-4 { background: rgba(59,130,246,0.15); color: #2563EB; }
+  .score-3 { background: rgba(245,158,11,0.15); color: #D97706; }
+  .score-2 { background: rgba(239,68,68,0.15); color: #DC2626; }
+  .score-1 { background: rgba(107,114,128,0.15); color: #6B7280; }
+
+  .empty-dash {
+    text-align: center;
+    padding: 60px 32px;
+    color: var(--text-secondary);
+  }
+  .empty-dash .empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-dash h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+  .empty-dash p { font-size: 14px; line-height: 1.7; }
+
+  /* export btn */
+  .dash-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .action-btn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--navien-border);
+    background: #fff;
+    color: var(--text-primary);
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .action-btn:hover { border-color: var(--navien-red); color: var(--navien-red); }
+  .action-btn.primary {
+    background: var(--navien-red);
+    border-color: var(--navien-red);
+    color: #fff;
+  }
+  .action-btn.primary:hover { background: #d55a15; }
+
+  /* filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-select {
+    padding: 8px 14px;
+    border: 1.5px solid var(--navien-border);
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+    background: #fff;
+  }
+  .filter-select:focus { border-color: var(--navien-red); }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .survey-hero h1 { font-size: 22px; }
+    .question-card { padding: 20px 18px; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .nav-tab { padding: 8px 12px; font-size: 13px; }
+  }
+
+  /* 관리자 chip */
+  .admin-chip {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 14px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .admin-chip.show { display: flex; }
+  .admin-chip button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .admin-chip button:hover { background: rgba(255,255,255,0.35); }
+
+  /* 관리자 로그인 모달 */
+  .admin-modal-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,20,50,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  .admin-modal-backdrop.show { display: flex; }
+  .admin-modal-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 36px 32px;
+    width: 100%; max-width: 360px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+    animation: modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.85) translateY(20px); opacity:0; }
+    to   { transform: scale(1) translateY(0); opacity:1; }
+  }
+  .admin-modal-logo { text-align:center; margin-bottom:16px; }
+  .admin-modal-logo img { height:30px; object-fit:contain; }
+  .admin-modal-title { font-size:18px; font-weight:800; color:var(--text-primary); text-align:center; margin-bottom:4px; }
+  .admin-modal-sub { font-size:12px; color:var(--text-secondary); text-align:center; margin-bottom:22px; }
+  .admin-modal-field { display:flex; flex-direction:column; gap:6px; margin-bottom:13px; }
+  .admin-modal-field label { font-size:12px; font-weight:700; color:var(--text-secondary); letter-spacing:.5px; }
+  .admin-modal-input {
+    padding:11px 14px; border:1.5px solid var(--navien-border);
+    border-radius:10px; font-family:'Noto Sans KR',sans-serif;
+    font-size:14px; outline:none; background:#fafafa; width:100%; box-sizing:border-box;
+    transition:border-color .2s;
+  }
+  .admin-modal-input:focus { border-color:var(--navien-red); background:#fff; }
+  .admin-modal-error { font-size:12px; color:#DC2626; text-align:center; min-height:18px; margin-bottom:4px; }
+  .admin-modal-btn {
+    width:100%; padding:13px;
+    background:linear-gradient(90deg,#1B3D72,#E87722);
+    color:#fff; border:none; border-radius:10px;
+    font-family:'Noto Sans KR',sans-serif; font-size:15px; font-weight:700;
+    cursor:pointer; transition:all .2s; margin-top:4px;
+    box-shadow:0 4px 16px rgba(232,119,34,.3);
+  }
+  .admin-modal-btn:hover { filter:brightness(1.08); transform:translateY(-1px); }
+  .admin-modal-close {
+    position:absolute; top:14px; right:18px;
+    background:none; border:none; font-size:20px;
+    color:var(--text-secondary); cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- 관리자 로그인 모달 -->
+<div class="admin-modal-backdrop" id="adminModal">
+  <div class="admin-modal-box">
+    <button class="admin-modal-close" onclick="closeAdminModal()">✕</button>
+    <div class="admin-modal-logo">
+      <img src="data:image/jpeg;base64,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" alt="경동나비엔">
+    </div>
+    <div class="admin-modal-title">관리자 로그인</div>
+    <div class="admin-modal-sub">결과 분석은 관리자만 열람 가능합니다</div>
+    <div class="admin-modal-field">
+      <label>아이디</label>
+      <input class="admin-modal-input" id="adminId" type="text" placeholder="아이디 입력" autocomplete="off">
+    </div>
+    <div class="admin-modal-field">
+      <label>비밀번호</label>
+      <input class="admin-modal-input" id="adminPw" type="password" placeholder="비밀번호 입력"
+             onkeydown="if(event.key==='Enter')doAdminLogin()">
+    </div>
+    <div class="admin-modal-error" id="adminLoginError"></div>
+    <button class="admin-modal-btn" onclick="doAdminLogin()">로그인</button>
+  </div>
+</div>
+
+<!-- 헤더 -->
+<header class="site-header" style="justify-content:space-between;">
+  <div id="headerTitle" style="color:rgba(255,255,255,.9);font-size:15px;font-weight:700;letter-spacing:.5px;">
+    경동나비엔 사전점검 만족도 조사
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button id="navAdminBtn" onclick="openAdminModal()"
+            style="padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;
+                   cursor:pointer;border:none;background:rgba(255,255,255,.15);
+                   color:rgba(255,255,255,.85);font-family:inherit;transition:all .2s;"
+            onmouseover="this.style.background='rgba(255,255,255,.25)'"
+            onmouseout="this.style.background='rgba(255,255,255,.15)'">🔒 관리자</button>
+    <div class="admin-chip" id="adminChip">
+      <span>👤 관리자</span>
+      <button onclick="adminLogout()">로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════ SURVEY PAGE ══════════════ -->
+<div id="page-survey" class="page active">
+
+  <div class="survey-hero">
+    <div class="hero-badge">2026 사전점검 서비스 품질향상</div>
+    <h1>중대형 / 캐스케이드<br><span>사전점검 만족도 조사</span></h1>
+    <p>고객님의 소중한 의견은 경동나비엔 서비스 품질 향상에 직접 반영됩니다.<br>응답 소요 시간은 약 1~3분입니다.</p>
+    <div style="margin:0 auto 8px; display:flex; justify-content:center;">
+      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/9460e3241617375.697ab4e3e2021.jpg" alt="KDZ 캐릭터" style="height:110px; object-fit:contain; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.35)); border-radius:12px;" onerror="this.style.display='none'">
+    </div>
+    <div class="progress-info">
+      <div class="progress-pill">⏱ 예상 소요: 1~3분</div>
+    </div>
+    <div style="margin-top:24px;">
+      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/b8692d241617375.697ab4e3e316d.gif"
+           alt="KDZ 캐릭터"
+           style="height:110px; object-fit:contain; filter:drop-shadow(0 4px 20px rgba(0,0,0,0.35));"
+           onerror="this.style.display='none'">
+    </div>
+  </div>
+
+  <div class="survey-container" id="surveyForm">
+
+    <!-- 점검 일자 -->
+    <div class="question-card" style="animation-delay:0.05s">
+      <div class="q-header">
+        <div class="q-num">📌</div>
+        <div>
+          <div class="q-text">점검 일자<span class="required-mark">*</span></div>
+          <div class="q-sub">사전점검을 받으신 날짜를 선택해 주세요.</div>
+        </div>
+      </div>
+      <div class="info-field" style="max-width:240px;">
+        <input class="info-input" id="f-date" type="date">
+      </div>
+    </div>
+
     <!-- Q1 친절도 -->
     <div class="question-card" style="animation-delay:0.1s">
       <div class="q-header">
