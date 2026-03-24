@@ -829,9 +829,9 @@
           <span class="option-label">⛪ 종교시설</span>
         </label>
         <label class="option-item" style="flex:1 1 calc(50% - 5px); min-width:130px;" onclick="selectOption(this,'f-facility')">
-          <input type="radio" name="f-facility" value="체육시설">
+          <input type="radio" name="f-facility" value="복지시설">
           <div class="radio-circle"></div>
-          <span class="option-label">🏟 체육시설</span>
+          <span class="option-label">🏢 복지시설</span>
         </label>
       </div>
     </div>
@@ -1221,7 +1221,7 @@ async function renderDashboard() {
   const grid = document.getElementById('chartsGrid');
   grid.innerHTML = '';
   const pieConfigs = [
-    { id:'chart-facility', title:'이용 용도', key:'facility', labels:['공공시설','교육시설','상업시설','숙박시설','주거시설','의료시설','종교시설','체육시설'] },
+    { id:'chart-facility', title:'이용 용도', key:'facility', labels:['공공시설','교육시설','상업시설','숙박시설','주거시설','의료시설','종교시설','복지시설'] },
     { id:'chart-q3',  title:'Q1 기사 친절도',     key:'q3',  labels:['1점','2점','3점','4점','5점'], isRating:true },
     { id:'chart-q4',  title:'Q2 점검 충분도',      key:'q4',  labels:['1점','2점','3점','4점','5점'], isRating:true },
     { id:'chart-q5',  title:'Q3 설명 충분도',      key:'q5',  labels:['1점','2점','3점','4점','5점'], isRating:true },
@@ -1355,4 +1355,4 @@ function goToDashboard() {
 }
 </script>
 </body>
-      </html>
+  </html>
